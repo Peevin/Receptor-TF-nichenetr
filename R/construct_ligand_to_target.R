@@ -429,10 +429,11 @@ construct_ligand_target_matrix = function(weighted_networks, ligands, ltf_cutoff
   ltf_matrix = construct_ligand_tf_matrix(weighted_networks, ligands, ltf_cutoff, algorithm, damping_factor)
 
   # preparing the gene regulatory matrix
-  grn_matrix = construct_tf_target_matrix(weighted_networks)
+#   grn_matrix = construct_tf_target_matrix(weighted_networks)
 
   # Multiply ligand-tf matrix with tf-target matrix
-  ligand_to_target = (ltf_matrix %*% grn_matrix)
+#   ligand_to_target = (ltf_matrix %*% grn_matrix)
+  ligand_to_target = ltf_matrix
 
   # Secondary targets
   if (secondary_targets == TRUE) {
