@@ -500,7 +500,6 @@ PPR_wrapper = function(ligand,E,G,delta,id2allgenes,ppr_cutoff) {
 }
 single_ligand_ppr_wrapper = function(l,E,G,delta,id2allgenes){
   # set ligand as seed in preference vector E
-  l = unlist(l)
   E[id2allgenes[l]] = 1
   return(igraph::page_rank(G, algo = c("prpack"), vids = igraph::V(G),directed = TRUE, damping = delta, personalized = E) %>% .$vector)
 }
