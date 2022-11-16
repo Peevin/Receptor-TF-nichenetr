@@ -42,14 +42,15 @@ construct_weighted_networks = function(lr_network, sig_network, gr_network,sourc
   # perform weighted network aggregation
   gr_network_w = gr_network %>% inner_join(source_weights_df,by = "source") %>% group_by(from, to) %>% summarize(weight = sum(weight)) %>% ungroup()
   if (n_output_networks == 2) {
-    ligand_signaling_w = bind_rows(lr_network, sig_network) %>% inner_join(source_weights_df,by = "source") %>% group_by(from, to) %>% summarize(weight = sum(weight)) %>% ungroup()
+    ligand_signaling_w = sig_network %>% inner_join(source_weights_df,by = "source") %>% group_by(from, to) %>% summarize(weight = sum(weight)) %>% ungroup()
+#     ligand_signaling_w = bind_rows(lr_network, sig_network) %>% inner_join(source_weights_df,by = "source") %>% group_by(from, to) %>% summarize(weight = sum(weight)) %>% ungroup()
     weighted_networks = list(lr_sig = ligand_signaling_w %>% ungroup(), gr = gr_network_w %>% ungroup())
   }
-  else if (n_output_networks == 3) {
-    lr_network_w = lr_network %>% inner_join(source_weights_df,by = "source") %>% group_by(from, to) %>% summarize(weight = sum(weight)) %>% ungroup()
-    sig_network_w = sig_network %>% inner_join(source_weights_df,by = "source") %>% group_by(from, to) %>% summarize(weight = sum(weight)) %>% ungroup()
-    weighted_networks = list(lr = lr_network_w %>% ungroup(), sig = sig_network_w %>% ungroup(), gr = gr_network_w %>% ungroup())
-  }
+#   else if (n_output_networks == 3) {
+#     lr_network_w = lr_network %>% inner_join(source_weights_df,by = "source") %>% group_by(from, to) %>% summarize(weight = sum(weight)) %>% ungroup()
+#     sig_network_w = sig_network %>% inner_join(source_weights_df,by = "source") %>% group_by(from, to) %>% summarize(weight = sum(weight)) %>% ungroup()
+#     weighted_networks = list(lr = lr_network_w %>% ungroup(), sig = sig_network_w %>% ungroup(), gr = gr_network_w %>% ungroup())
+#   }
 }
 #' @title Add a new data source to the model
 #'
