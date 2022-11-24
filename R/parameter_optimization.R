@@ -186,9 +186,13 @@ mlrmbo_optimization = function(run_id,obj_fun,niter,ncores,nstart,additional_arg
 
   print(design)
   print(ctrl)
-
+  
+  print('before mbo')
+  
   res = mbo(obj_fun, design = design, learner = surr.rf ,control = ctrl, show.info = TRUE, more.args = additional_arguments)
 
+  print('after mbo')
+  
   parallelStop()
   return(res)
 }
