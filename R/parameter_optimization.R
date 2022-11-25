@@ -28,6 +28,10 @@
 model_evaluation_optimization = function(x, source_names, algorithm, correct_topology, lr_network, sig_network, gr_network, settings, secondary_targets = FALSE, remove_direct_links = "no",damping_factor = NULL,...){
 
   requireNamespace("dplyr")
+  
+  print('[x]:')
+  print(x)
+  
   if (!is.null(damping_factor) & is.null(x$damping_factor)){ # for the case damping factor is a fixed parameter
     x$damping_factor = damping_factor
   }
